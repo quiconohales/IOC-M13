@@ -42,8 +42,6 @@ public class User {
 	@Enumerated(value = EnumType.STRING)
 	private UserEnum userenum;
 
-	@Column(name = "salary")
-	private Integer salary;
 
 	/**
 	 * Constructor para la clase user
@@ -66,13 +64,13 @@ public class User {
 		this.password = password;
 		this.phone = phone;
 		this.userenum = userenum;
-		this.salary = salary;
+		
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email + ", password="
-				+ password + ", phone=" + phone + ", userenum=" + userenum + ", salary=" + salary + "]";
+				+ password + ", phone=" + phone + ", userenum=" + userenum + "]";
 	}
 
 	public String getName() {
@@ -121,14 +119,6 @@ public class User {
 
 	public void setUserenum(UserEnum userenum) {
 		this.userenum = userenum;
-	}
-
-	public Integer getSalary() {
-		return salary;
-	}
-
-	public void setSalary(Integer salary) {
-		this.salary = salary;
 	}
 
 	public Integer getId() {

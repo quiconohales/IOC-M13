@@ -29,12 +29,6 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User saveUser(@RequestBody User user) {
-//		switch (user.getUserenum().ordinal()) {
-//		case 1:
-//			user.setSalary(3000);
-//		case 2:
-//			user.setSalary(1000);
-//		}
 		return iuserDAO.save(user);
 	}
 
@@ -45,12 +39,6 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User updateUser(@RequestBody User user) {
-		switch (user.getUserenum().ordinal()) {
-		case 1:
-			user.setSalary(3000);
-		case 2:
-			user.setSalary(1000);
-		}
 		return iuserDAO.save(user);
 	}
 

@@ -19,12 +19,11 @@ public class maketoken {
 	String KEY = "mi_clave";
 	long tiempo = System.currentTimeMillis();
 	String jwt = Jwts.builder().signWith(SignatureAlgorithm.HS256, KEY)
-
 			.setSubject("QUICO NOHALES").setIssuedAt(new Date(tiempo + 900000)).setExpiration(new Date(tiempo))
 			.claim("email", "Quiconohales@gmail.com").compact();
+	
 	JsonObject json = Json.createObjectBuilder().add("JWT", jwt).build();
-		System.out.println("JWT" + json);
-//	return new ResponseEntity<>(json, HttpStatus.CREATED);
-		return json;
+	System.out.println("JWT" + json);
+	return json;
 }
 }

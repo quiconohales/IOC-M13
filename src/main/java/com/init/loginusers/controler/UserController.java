@@ -64,67 +64,31 @@ public class UserController {
 	public ResponseEntity<JsonObject> validateUser(@RequestBody User user) {
 		boolean trobat = false;
 		ArrayList<User> listUser;
-		// ArrayList<User> UserPOSITION = new ArrayList();
- 
 		listUser = userServiceImpl.UserPOSITIONALL();
-
+		// Es recorre lllista usuaris per comprovar que existeixi
 		for (int i = 0; i < listUser.size(); i++) {
-
 			if ((listUser.get(i).getEmail().toString().equals(user.getEmail().toString()))
 					&& (listUser.get(i).getPassword().toString().equals(user.getPassword().toString()))) {
 				trobat = true;
 			}
 		}  
-		if (trobat) {
+		if (trobat) { // si s'ha trobat cridem al metode maketoken per crear-lo
 			maketoken token = new maketoken();
-			//token.maketok(user);
 			return new ResponseEntity<>(token.maketok(user), HttpStatus.CREATED);
-			
-//			String KEY = "mi_clave";
-//			long tiempo = System.currentTimeMillis();
-//			String jwt = Jwts.builder().signWith(SignatureAlgorithm.HS256, KEY)
-//
-//					.setSubject("QUICO NOHALES").setIssuedAt(new Date(tiempo + 900000)).setExpiration(new Date(tiempo))
-//					.claim("email", "Quiconohales@gmail.com").compact();
-//			JsonObject json = Json.createObjectBuilder().add("JWT", jwt).build();
-// 			System.out.println("JWT" + json);
-//			return new ResponseEntity<>(json, HttpStatus.CREATED); 
-
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
 
-	@GetMapping("/get/position/{enum}")
-	public ResponseEntity<List<User>> UserPOSITIONALL(@PathVariable(name = "enum") Integer userenum) {
-
-		ArrayList<User> listUser;
-		ArrayList<User> UserPOSITION = new ArrayList();
-
-		listUser = userServiceImpl.UserPOSITIONALL();
-		for (int i = 0; i < listUser.size(); i++) {
-
-			if (listUser.get(i).getUserenum().ordinal() == userenum) {
-				UserPOSITION.add(listUser.get(i));
-			}
-		}
-		return new ResponseEntity<>(UserPOSITION, HttpStatus.OK);
-	}
-
 	// Update /update/{id}
 	@PutMapping("/update/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable(name = "id") Integer id, @RequestBody User User) {
-
 		User user_select = new User();
 		User user_update = new User();
 		user_select = userServiceImpl.UserXID(id);
-
 		user_select.setName(User.getName());
 		user_select.setUserenum(User.getUserenum());
-		user_select.setSalary(User.getSalary());
-
 		user_update = userServiceImpl.updateUser(user_select);
-
 		return new ResponseEntity<>(user_update, HttpStatus.OK);
 	}
 
